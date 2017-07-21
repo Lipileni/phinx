@@ -436,7 +436,7 @@ abstract class PdoAdapter implements AdapterInterface
         if (strcasecmp($direction, MigrationInterface::UP) === 0) {
             // up
             $sql = sprintf(
-                "INSERT INTO %s (%s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', %s);",
+                "INSERT INTO %s (%s, %s, %s, %s, %s) VALUES (%s, '%s', '%s', '%s', %s);",
                 $this->getSchemaTableName(),
                 $this->quoteColumnName('version'),
                 $this->quoteColumnName('migration_name'),
@@ -454,7 +454,7 @@ abstract class PdoAdapter implements AdapterInterface
         } else {
             // down
             $sql = sprintf(
-                "DELETE FROM %s WHERE %s = '%s'",
+                "DELETE FROM %s WHERE %s = %s",
                 $this->getSchemaTableName(),
                 $this->quoteColumnName('version'),
                 $migration->getVersion()
